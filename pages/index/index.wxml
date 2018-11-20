@@ -5,7 +5,7 @@
     <view class="slide-box" data-index="{{index}}"
        bindtouchstart="touchS"
         bindtouchend="touchE"
-          animation="{{ index == activeIndex ? animation : animationClose }}" 
+          animation="{{ index == activeIndex ? animationStart : animationClose }}" 
           >
       <view class="pot-image">
         <image src="{{item.image}}"></image>

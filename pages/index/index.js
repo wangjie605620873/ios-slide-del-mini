@@ -86,7 +86,7 @@ Page({
     animationClose : "",
   },
   onLoad: function () {
-    this.animation = wx.createAnimation({
+    this.animationStart = wx.createAnimation({
       duration: 450,
       timingFunction: 'ease',
       delay: 0,
@@ -108,11 +108,9 @@ Page({
   touchS: function (e) {  //滑动开始
   console.log(e,'start')
     this.setData({
-      animation: ""
-    })
-    this.setData({
       activeIndex: e.currentTarget.dataset.index, //设置当前滑动  元素的 index
-      startClient: e.changedTouches[0].clientX   //滑动元素的  起始x  位置
+      startClient: e.changedTouches[0].clientX,   //滑动元素的  起始x  位置
+      animationStart: ""
     })
   },
   touchE: function (e) { //滑动结束
@@ -120,13 +118,13 @@ Page({
     var clientX = e.changedTouches[0].clientX  //计算当前移动的距离
 
     if (clientX - this.data.startClient > 60) {    //起始点 - 结束点   关闭
-      this.animation.left(0).step()
+      this.animationStart.left(0).step()
     } else if (clientX - this.data.startClient  < -60) {  //打开
-      this.animation.left(-180).step()   
+      this.animationStart.left(-180).step()   
       this.animationClose.left(0).step()//关闭上一个
     }
     this.setData({
-      animation: this.animation.export(),
+      animationStart: this.animationStart.export(),
       animationClose: this.animationClose.export()
     })
   }
